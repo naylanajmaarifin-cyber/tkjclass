@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TKJClass Simulator</title><link rel="stylesheet" href="css/style.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}</script></head>
+<body>
+<video id="camVideo" playsinline muted></video>
+<div id="app">
+ <header id="topbar">
+  <b class="logo">TKJClass</b>
+  <div class="grp" id="modes">
+   <button data-act="mode" data-v="select" class="on" title="Select Device">🖱 Pilih</button>
+   <button data-act="mode" data-v="move" title="Move Device">✥ Pindah</button>
+   <button data-act="mode" data-v="connect" title="Connect Cable">🔌 Sambung</button>
+   <button data-act="mode" data-v="disconnect" title="Disconnect Cable">✂ Lepas</button>
+  </div>
+  <select id="cableSel" title="Jenis kabel"><option value="straight">UTP Straight</option><option value="crossover">UTP Crossover</option><option disabled>Fiber (segera)</option><option disabled>Console (segera)</option></select>
+  <label class="chk"><input type="checkbox" id="snap" checked>Grid</label>
+  <span id="badge" class="badge">0 perangkat</span>
+  <span class="sp"></span>
+  <button data-act="arStart" class="accent">📷 Mulai AR</button>
+  <button data-act="dash">☰ Menu</button>
+  <button data-act="toggleSide" id="sideBtn">⚙ Panel</button>
+ </header>
+ <div id="main">
+  <nav id="palette"><small>Tambah</small>
+   <button data-act="add" data-v="pc">🖥<span>PC</span></button><button data-act="add" data-v="switch">🔀<span>Switch</span></button><button data-act="add" data-v="router">📡<span>Router</span></button>
+   <button data-act="add" data-v="ap">📶<span>AP</span></button><button data-act="add" data-v="server">🗄<span>Server</span></button></nav>
+  <div id="view"><div id="hint"></div><div id="toast"></div><div id="err" hidden></div></div>
+  <aside id="side"><div id="tabs"></div><div id="panel"></div></aside>
+ </div>
+</div>
+
+<div id="dash"><div class="card">
+ <h1>TKJClass Simulator</h1><p class="sub"><i>Interactive 3D Network Laboratory &amp; Augmented Reality Learning</i></p>
+ <div id="prog"></div>
+ <div class="menu">
+  <button data-go="sim">▶ Mulai Simulasi 3D</button><button data-go="ar">📷 Mulai Mode AR</button><button data-go="learn">📘 Belajar Perangkat Jaringan</button>
+  <button data-go="topo">🕸 Praktik Topologi</button><button data-go="ip">🔢 Praktik IP Address</button><button data-go="diag">🩺 Diagnostik Jaringan</button>
+  <button data-go="miss">🎯 Misi dan Tantangan</button><button data-go="proj">💾 Simpan dan Muat Proyek</button><button data-go="guide">❓ Panduan Penggunaan</button>
+ </div><p class="muted">Semua tes jaringan adalah simulasi internal — tidak ada paket dikirim ke jaringan nyata.</p></div></div>
+
+<div id="arConsent" class="modal"><div class="card"><h2>📷 Izin Kamera untuk Mode AR</h2>
+ <p>Kamera hanya dinyalakan setelah Anda menekan <b>Izinkan &amp; Mulai</b>. Video diproses di perangkat Anda, <b>tidak diunggah</b> dan <b>tidak disimpan</b>. Anda bisa menghentikan kamera kapan saja.</p>
+ <ul id="arSupport"></ul>
+ <div class="row"><button class="accent" id="arGo">Izinkan &amp; Mulai</button><button id="arNo">Batal</button></div></div></div>
+
+<div id="arOverlay">
+ <div class="arbar"><b>AR</b><span id="arStatus">…</span><button id="arExit">⏹ Hentikan kamera &amp; keluar</button></div>
+ <div class="arpanel">
+  <div class="row"><select id="arTool"><option value="select">Pilih</option><option value="place">Tempatkan perangkat</option><option value="move">Pindahkan terpilih</option><option value="connect">Hubungkan (ketuk port)</option><option value="disconnect">Putuskan (ketuk kabel)</option></select>
+   <select id="arType"><option value="pc">PC</option><option value="switch">Switch</option><option value="router">Router</option><option value="ap">AP</option><option value="server">Server</option></select><button id="arAnchor">Atur ulang area</button></div>
+  <div class="row"><select id="arSrc"></select>→<select id="arDst"></select><select id="arCab"><option value="straight">Straight</option><option value="crossover">Crossover</option></select><button id="arConnect">Hubungkan</button></div>
+  <div class="row"><select id="arPSrc"></select><input id="arPIp" placeholder="ping IP, mis. 192.168.10.2"><button id="arPing">Ping</button></div>
+  <pre id="arOut"></pre></div></div>
+<script type="module" src="js/main.js"></script></body></html>
